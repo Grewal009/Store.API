@@ -25,3 +25,14 @@ Content-Type: application/json
     "price": 19.99,
     "releaseDate": "2011-11-15"
 }
+
+###
+PUT http://localhost:5102/games/1
+Content-Type: application/json
+
+{
+    "name": "Minecraft",
+    "genre": "Kids and Family",
+    "price": 9.99,
+    "releaseDate": "2011-01-05"
+}
