@@ -12,6 +12,21 @@ List<GameDto> games = [
 
 app.MapGet("games", () => games);
 
-app.MapGet("games/{id}", (int id) => games.Find(x => x.Id == id));
+app.MapGet("games/{id}", (int id) => games.Find(x => x.Id == id)).WithName("GetGame");
+//give name to the endpoint to access the created resource .WithName("GetGame")
+
+app.MapPost("games", (CreateGameDto newGame) =>
+{
+    GameDto game = new(
+        games.Count + 1,
+        newGame.Name,
+        newGame.Genre,
+        newGame.Price,
+        newGame.ReleaseDate
+    );
+    games.Add(game);
+
+    return Results.CreatedAtRoute("GetGame", new { id = game.Id }, game);
+});
 
 app.Run();

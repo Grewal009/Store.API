@@ -15,3 +15,13 @@ GET http://localhost:5102/games/4/id
 ### 400 Bad Request
 GET http://localhost:5102/games/id
 
+###
+POST http://localhost:5102/games
+Content-Type: application/json
+
+{
+    "name": "Minecraft",
+    "genre": "Kids and Family",
+    "price": 19.99,
+    "releaseDate": "2011-11-15"
+}
