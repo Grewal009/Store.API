@@ -59,3 +59,14 @@ Content-Type: application/json
     "price": 19.99,
     "releaseDate": "2011-11-15"
 }
+
+###
+POST http://localhost:5102/games
+Content-Type: application/json
+
+{
+    "name": "Minecraft",
+    "genreId": 5,
+    "price": 9.99,
+    "releaseDate": "2011-11-15"
+}
