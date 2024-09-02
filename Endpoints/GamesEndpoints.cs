@@ -1,6 +1,7 @@
 using Store.API.Data;
 using Store.API.Dtos;
 using Store.API.Entities;
+using Store.API.Mapping;
 
 namespace Store.API.Endpoints;
 
@@ -33,22 +34,13 @@ public static class GamesEndpoints
 
         group.MapPost("/", (CreateGameDto newGame, StoreContext dbContext) =>
         {
-            Game game = new()
-            {
-                Name = newGame.Name,
-                Genre = dbContext.Genres.Find(newGame.GenreId),
-                GenreId = newGame.GenreId,
-                Price = newGame.Price,
-                ReleaseDate = newGame.ReleaseDate
-
-            };
+            Game game = newGame.ToEntity();
+            game.Genre = dbContext.Genres.Find(newGame.GenreId);
 
             dbContext.Games.Add(game);
             dbContext.SaveChanges();
 
-            GameDto gameDto = new(game.Id, game.Name, game.Genre!.Name, game.Price, game.ReleaseDate);
-
-            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, gameDto);
+            return Results.CreatedAtRoute(GetGameEndpointName, new { id = game.Id }, game.ToDto());
         });
 
         group.MapPut("/{id}", (int id, UpdateGameDto updatedGame) =>
