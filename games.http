@@ -65,8 +65,8 @@ POST http://localhost:5102/games
 Content-Type: application/json
 
 {
-    "name": "Minecraft",
-    "genreId": 5,
+    "name": "Craft",
+    "genreId": 3,
     "price": 9.99,
     "releaseDate": "2011-11-15"
 }
